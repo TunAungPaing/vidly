@@ -50,6 +50,7 @@ namespace Vidly.Controllers
             return View(customer);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Customer customer)
         {
             if(!ModelState.IsValid)

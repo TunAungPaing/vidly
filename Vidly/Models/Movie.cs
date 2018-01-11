@@ -16,6 +16,7 @@ namespace Vidly.Models
         [Required]
         public DateTime DateAdded { get; set; }
         [Required]
+        [Range(1,30)]
         public int NumberInStock { get; set; }
         public Genre Genre { get; set; }
         public int GenreId { get; set; }

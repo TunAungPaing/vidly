@@ -41,13 +41,24 @@ namespace Vidly.Controllers
             var GenreName = _Context.Genres.ToList();
             var viewModel = new MovieViewModel
             {
+                Movie = new Movie(),
                 Genres = GenreName
         };
             return View(viewModel);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieViewModel
+                {
+                    Movie = movie,
+                    Genres = _Context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
             if (movie.id==0)
             {
                 movie.DateAdded = DateTime.Now;
